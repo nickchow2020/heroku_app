@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}feedback{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Edit Feedback</h1>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {% for field in form if field.widget.input_type != "hidden" %}
+            {{field.label}}
+            {{field(class_="form-control")}}
+        {% endfor %}
+        <button class="btn btn-success my-3">Save</button>
+        <a href="/user/{{feedback.user.username}}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

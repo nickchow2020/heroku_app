@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{user.first_name}}{% endblock %}
+{% block content %}
+    <h1>User Information</h1>
+    <form action="/users/{{user.username}}/delete" method="POST">
+        <button class="btn btn-danger">Delete {{user.first_name}}</button>
+    </form>
+    <ul>
+        <li><strong>Account Name:</strong>{{user.username}}</li>
+        <li><strong>Email:</strong>{{user.email}}</li>
+        <li><strong>First Name:</strong>{{user.first_name}}</li>
+        <li><strong>Last Name:</strong>{{user.last_name}}</li>
+    </ul>
+    <h1>User Feedback</h1>
+    <a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add New Feedback</a>
+    <ul>
+        {% for fb in user.tweets %}
+            <li class="my-3">{{fb.title}}
+                <a href="/feedback/{{fb.id}}/update" class="btn btn-sm btn-success">Edit</a>
+                <form action="/feedback/{{fb.id}}/delete" method="POST" style="display: inline;">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
